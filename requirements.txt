@@ -1,0 +1,7 @@
+python-dotenv==1.0.0
+groq
+fastapi
+pydantic
+bs4
+requests
+motor
