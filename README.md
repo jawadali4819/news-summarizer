@@ -1,11 +1,11 @@
-```markdown
+
 # News Article Summarizer
 
 Welcome to the **News Article Summarizer**, a simple and creative tool that allows users to input the link of any news article, fetch its content through data mining, and generate a concise summary using Grok's API powered by the LLaMA model. This project demonstrates the synergy of **React JS**, **FastAPI**, and modern AI tools to streamline news consumption.
 
 > **Note:** This is a small experimental project designed to showcase an idea. While functional, the code may not adhere to all professional standards. Feel free to build upon it, improve it, and make it your own!
 
----
+
 
 ## Features
 
@@ -13,7 +13,7 @@ Welcome to the **News Article Summarizer**, a simple and creative tool that allo
 - **AI-Powered Summarization:** Uses prompt engineering with Grok's API (LLaMA model) to summarize articles effectively.
 - **React + FastAPI Integration:** The frontend is built in React JS, and the backend is powered by FastAPI for efficient processing.
 
----
+
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ Ensure you have the following installed:
 - **Python** (for backend)
 - **MongoDB** (for data storage)
 
----
+
 
 ### Setup Instructions
 
@@ -33,7 +33,7 @@ Ensure you have the following installed:
 ```bash
 git clone <repository_url>
 cd news-article-summarizer
-```
+
 
 #### Step 2: Configure Environment Variables
 
@@ -44,7 +44,7 @@ GROK_API_KEY=<your_grok_api_key>
 MONGODB_URI=<your_mongodb_connection_string>
 ```
 
----
+
 
 #### Step 3: Backend Setup
 
