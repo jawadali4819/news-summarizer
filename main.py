@@ -6,7 +6,7 @@ from db import db
 import logging
 from news import NewsSummarizer
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 
 # Configure logging
@@ -64,18 +64,16 @@ async def get_articles(db=Depends(get_db)):
 
 @app.post("/articles", status_code=status.HTTP_201_CREATED, response_model=ArticleModel)
 async def save_article(input_data: URLInput, db=Depends(get_db)):
-    """Endpoint to fetch, summarize, and save a new article."""
+    """Endpoint to fetch, summarize, and save a new article, replacing existing one if URL already exists."""
     try:
         url_str = str(input_data.url)
         logger.info(f"Starting processing for URL: {url_str}")
 
-        # Check if article exists
+        # Check if article exists and delete it if found
         existing_article = await db.find_one({"url": url_str})
         if existing_article:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Article with this URL already exists."
-            )
+            logger.info(f"Found existing article with URL: {url_str}. Deleting it.")
+            await db.delete_one({"url": url_str})
 
         # Initialize summarizer with proper API key
         try:
@@ -119,6 +117,7 @@ async def save_article(input_data: URLInput, db=Depends(get_db)):
             "summary": result.get("summary", ""),
             "image": result.get("image", ""),
             "link": url_str,
+            "created_at": datetime.now(timezone.utc)  # Optional: Add timestamp for tracking
         }
 
         # Save to database
@@ -145,8 +144,6 @@ async def save_article(input_data: URLInput, db=Depends(get_db)):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An unexpected error occurred: {str(e)}"
         )
-
-
 
 
 

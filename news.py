@@ -11,7 +11,7 @@ from typing import Dict, Optional, List
 
 
 class NewsSummarizer:
-    def __init__(self, api_key: str, model_name: str = "llama-3.3-70b-specdec"):
+    def __init__(self, api_key: str, model_name: str = "llama-3.3-70b-versatile"):
         """Initialize the NewsSummarizer with Groq API key and model."""
         if not api_key:
             raise ValueError("API key is required.")
